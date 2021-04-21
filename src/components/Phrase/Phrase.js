@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Text, SafeAreaView } from 'react-native';
 // import { styles } from '../constants/globalStyles';
 
-export default function Example({label}) {
+export default function Prase({label}) {
 
   console.log(label);
   return (

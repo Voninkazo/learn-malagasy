@@ -4,11 +4,11 @@ import { View } from 'react-native';
 
 import { storiesOf } from '@storybook/react-native';
 
-import Example from './Example';
+import Phrase from './Phrase';
 
 
 storiesOf('MyComponent', module)
   .addDecorator(story => <View>{story()}</View>)
-  .add('name', () => <Example label= {'Sandy'}/>)
-  .add('age', () => <Example label= {'20'} />)
-  .add('city', () => <Example label= {'Ambato'} />);
+  .add('name', () => <Phrase label= {'Sandy'}/>)
+  .add('age', () => <Phrase label= {'20'} />)
+  .add('city', () => <Phrase label= {'Ambato'} />);
