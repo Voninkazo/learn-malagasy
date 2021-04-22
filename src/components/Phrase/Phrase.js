@@ -1,18 +1,36 @@
 // components/Task.js
 import * as React from 'react';
-import { Text, SafeAreaView } from 'react-native';
-// import { styles } from '../constants/globalStyles';
+import { StyleSheet, SafeAreaView, TextInput} from 'react-native';
 
-export default function Prase({label}) {
+const styles = StyleSheet.create({
+  selfareaView: {
+    paddingRight: 23,
+    paddingLeft: 23,
+    paddingTop: 15,
+  },
 
-  console.log(label);
+  textarea: {
+    fontSize: 20,
+    lineHeight: 24,
+    textAlign: 'center',
+    color: '#111827',
+    padding: 23,
+    borderColor: '#E5E5E5',
+    borderWidth: 1,
+  }
+})
+
+export default function Prase({text}) {
+  console.log(text);
   return (
-    <SafeAreaView >
-      <Text>{label}</Text>
-      <Text>{label}</Text>
-      <Text>{label}</Text>
-      <Text>{label}</Text>
-      <Text>{label}</Text>
+    <SafeAreaView style={styles.selfareaView} >
+      <TextInput 
+        multiline={true}
+        numberOfLines={3}
+        value={text}
+        editable={false}
+        style={styles.textarea}
+      />
     </SafeAreaView>
   );
 }
