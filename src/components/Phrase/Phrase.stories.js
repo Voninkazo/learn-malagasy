@@ -7,4 +7,6 @@ import Phrase from './Phrase';
 
 storiesOf('MyComponent', module)
   .addDecorator(story => <View>{story()}</View>)
-  .add('textarea', () => <Phrase text={'Roa ambin \' ny folo'}/>)
+  // random text
+  .add('Uneditable textarea', () => <Phrase text={'Roa ambin \' ny folo'}/>)
+  .add('Uneditable textarea long text', () => <Phrase text={'You have answered all the questions in this category'}/>)

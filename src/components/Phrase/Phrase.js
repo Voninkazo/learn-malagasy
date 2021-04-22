@@ -20,8 +20,8 @@ const styles = StyleSheet.create({
   }
 })
 
-export default function Prase({text}) {
-  console.log(text);
+export default function Phrase({text}) {
+
   return (
     <SafeAreaView style={styles.selfareaView} >
       <TextInput 
