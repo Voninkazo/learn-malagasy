@@ -1,7 +1,7 @@
 // components/Task.js
 import * as React from 'react';
 import {Image, View,SelfAreaView, TouchableOpacity, Text, StyleSheet } from 'react-native';
-import Learn from '../../assets/learn_icon.svg'
+import {ReactComponent as Learn} from '../../assets/learn_icon.svg'
 // import Correct from '../../assets/correct_icon.svg';
 // import Wrong from '../../assets/wrong_icon.svg';
 
