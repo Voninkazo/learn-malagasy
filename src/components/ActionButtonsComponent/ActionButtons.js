@@ -1,12 +1,9 @@
 // components/Task.js
 import * as React from 'react';
 import {Image, View, TouchableOpacity, Text } from 'react-native';
-import PickSvg from '../assets/arrow_next.svg';
 
 
-export default function Example({buttonText, onPressFunction, source}) {
-
-  console.log(buttonText);
+export default function ActionButtons({buttonText, onPressFunction}) {
 
   return (
       <View>
@@ -14,7 +11,16 @@ export default function Example({buttonText, onPressFunction, source}) {
           onPress={onPressFunction}
         >
         <Text>{buttonText}</Text>
-        <Image />
+        {
+          buttonText === 'Pick' ?
+          <Image source={require('../assets/pick.png')} />
+          : buttonText === 'Correct' ?
+          <Image source={require('../assets/correct.png')} />
+          : buttonText === 'Wrong' ?
+          <Image source={require('../assets/wrong.png')} />
+          :
+          ''
+        }
         </TouchableOpacity>
       </View>
   );
