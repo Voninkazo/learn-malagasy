@@ -15,7 +15,9 @@ export const getAllCategoriesIds = () => {
 };
 
 export const getPhraseIdsForCategory = catId => {
-  return categoriesData.categories.find(cat => cat.id === catId).phrasesIds;
+  const category = categoriesData.categories.find(cat => cat.id === catId)
+    .phrasesIds;
+  return (category && category.phraseId) || null;
 };
 
 export const getAllPhrases = () => {
