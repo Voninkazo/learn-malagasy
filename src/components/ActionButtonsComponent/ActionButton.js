@@ -34,9 +34,10 @@ const styles = StyleSheet.create({
 });
 
 
-export default function ActionButtons({buttonText,isCorrect,isDisabled, onPressFunction}) {
+ function ActionButton({buttonText,isCorrect,isDisabled, onPressFunction}) {
 
-  console.log(ArrowIcon)
+  // console.log(ArrowIcon);
+
   let buttonIcon;
 
   if(isCorrect) {
@@ -67,8 +68,10 @@ export default function ActionButtons({buttonText,isCorrect,isDisabled, onPressF
         >
           {buttonText}
         </Text>
-          {buttonIcon}
-        </TouchableOpacity>
+        {buttonIcon}
+         </TouchableOpacity>
       </SelfAreaView>
   );
 }
+
+export default ActionButton;
