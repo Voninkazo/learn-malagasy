@@ -26,6 +26,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: '600',
     color: '#fff',
+     fontSize: 16,
+    lineHeight: 19,
   },
 
   disabledText: {
@@ -38,7 +40,6 @@ const styles = StyleSheet.create({
 })
 
 export default function Button({buttonText, onPressFunction, disabled}) {
-  console.log(buttonText);
 
   return (
       <View>
