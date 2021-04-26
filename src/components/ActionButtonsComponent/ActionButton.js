@@ -1,6 +1,5 @@
-// components/Task.js
-import * as React from 'react';
-import { SelfAreaView, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import React from 'react'; 
+import { SafeAreaView, StyleSheet, Text, TouchableOpacity,} from 'react-native';
 
 import ArrowIcon from './assets/learn_icon.svg';
 import CorrectAnswerIcon from './assets/correct_icon.svg';
@@ -10,68 +9,53 @@ const styles = StyleSheet.create({
   container: {
     textAlign: 'center',
     padding: 23,
+  },
+  button: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: 'center'
+  },
+  text: {
     fontSize: 16,
     lineHeight: 19,
     fontWeight: '600',
+    marginRight: 10,
   },
-  button: {
-    display: 'flex',
-    flexDirection: 'row',
+  defaultText: { 
+    color: "#06B6D4", 
   },
-
-  defaultText: {
-    color: '#06B6D4',
-  },
-
   correctText: {
-    color: '#06D440',
+    color: "#06D440", 
   },
-
   wrongText: {
-    color: '#D4068E',
-  },
+    color: "#D4068E"
+  }
+})
 
-});
 
-
- function ActionButton({buttonText,isCorrect,isDisabled, onPressFunction}) {
-
-  // console.log(ArrowIcon);
-
-  let buttonIcon;
+export default function ActionButton({ onPressFunction,buttonText, isCorrect, isDisabled}) {
+ let buttonIcon;
+ let style;
 
   if(isCorrect) {
-    buttonIcon = <CorrectAnswerIcon />
-  }
-  else if(!isCorrect && isDisabled) {
-    buttonIcon = <WrongAnswerIcon />
-  }
-
-  else {
-    buttonIcon = <ArrowIcon />
-  }
-
+  style = [styles.correctText, styles.text]
+  buttonIcon = <CorrectAnswerIcon /> 
+   
+ } else if(!isCorrect && isDisabled) {
+  style = [styles.wrongText, styles.text ] 
+  buttonIcon = <WrongAnswerIcon />
+ } else {
+   buttonIcon = <ArrowIcon />
+   style = [styles.defaultText, styles.text]
+ } 
+ 
   return (
-      <SelfAreaView style={styles.container}>
-        <TouchableOpacity 
-          onPress={onPressFunction}
-          style={styles.button}
-        >
-        <Text 
-          style={
-            buttonText === 'Wrong' ?
-            styles.wrongText :
-            buttonText === 'Correct' ?
-            styles.correctText :
-            styles.defaultText
-          } 
-        >
-          {buttonText}
-        </Text>
-        {buttonIcon}
-         </TouchableOpacity>
-      </SelfAreaView>
-  );
-}
-
-export default ActionButton;
+    <SafeAreaView style={styles.container} > 
+        <TouchableOpacity onPress={onPressFunction} style={styles.button} disabled={isDisabled} isCorrect={isCorrect}>
+            <Text style={style}>
+            {buttonText}
+            </Text>
+            {buttonIcon}
+        </TouchableOpacity>
+    </SafeAreaView>
+  )}
