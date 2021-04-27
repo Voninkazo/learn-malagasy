@@ -8,4 +8,9 @@ import SectionHeading from './SectionHeading';
 storiesOf('Section Heading', module)
   .addDecorator(story => <View>{story()}</View>)
 
-  .add('Section heading component', () => <SectionHeading text={'category'} />);
+  .add('Shorter section heading', () => (
+    <SectionHeading text={'Seen phrases'} />
+  ))
+  .add('Longer section heading', () => (
+    <SectionHeading text={'Select a ctegory from the list'} />
+  ));
