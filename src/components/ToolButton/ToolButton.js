@@ -23,16 +23,16 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function ToolButton({buttonName, onPressFunction}) {
+export default function ToolButton({btnLabel, onPressFunction}) {
   let icon;
 
-  if (buttonName === 'add') {
+  if (btnLabel === 'add') {
     icon = <AddIcon />;
-  } else if (buttonName === 'tick') {
+  } else if (btnLabel === 'tick') {
     icon = <TickIcon />;
-  } else if (buttonName === 'double tick') {
+  } else if (btnLabel === 'double tick') {
     icon = <DoubleTickIcon />;
-  } else if (buttonName === 'back') {
+  } else if (btnLabel === 'back') {
     icon = <BackIcon />;
   } else {
     icon = <LightModeIcon />;

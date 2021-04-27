@@ -8,30 +8,27 @@ storiesOf('ToolButtonComponent', module)
   .addDecorator(getStory => <View>{getStory()}</View>)
 
   .add('Add button', () => (
-    <ToolButton buttonName={'add'} onPressFunction={() => alert('Add')} />
+    <ToolButton btnLabel={'add'} onPressFunction={() => alert('Add')} />
   ))
 
   .add('Tick button', () => (
-    <ToolButton
-      buttonName={'tick'}
-      onPressFunction={() => alert('Go to seen')}
-    />
+    <ToolButton btnLabel={'tick'} onPressFunction={() => alert('Go to seen')} />
   ))
 
   .add('Double tick button', () => (
     <ToolButton
-      buttonName={'double tick'}
+      btnLabel={'double tick'}
       onPressFunction={() => alert('Go to learn')}
     />
   ))
 
   .add('Back button', () => (
-    <ToolButton buttonName={'back'} onPressFunction={() => alert('Go back')} />
+    <ToolButton btnLabel={'back'} onPressFunction={() => alert('Go back')} />
   ))
 
   .add('Light switcher button', () => (
     <ToolButton
-      buttonName={'switch light'}
+      btnLabel={'switch light'}
       onPressFunction={() => alert('Switch light')}
     />
   ));
