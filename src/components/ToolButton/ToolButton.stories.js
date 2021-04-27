@@ -4,17 +4,34 @@ import {View} from 'react-native';
 
 import ToolButton from './ToolButton';
 
-import AddIcon from './assets/add_icon.svg';
-import TickIcon from './assets/tick_icon.svg';
-import DoubleTickIcon from './assets/double_tick_icon.svg';
-import BackIcon from './assets/back_icon.svg';
-import LightModeIcon from './assets/light_mode_icon.svg';
-
 storiesOf('ToolButtonComponent', module)
-  .addDecorator(getStory => (
-    <View style={{backgroundColor: 'blue'}}>{getStory()}</View>
+  .addDecorator(getStory => <View>{getStory()}</View>)
+
+  .add('Add button', () => (
+    <ToolButton buttonName={'add'} onPressFunction={() => alert('Add')} />
   ))
 
-  .add('Tool buttons', () => (
-    <ToolButton buttonIcon={'./assets/add_icon.svg'} />
+  .add('Tick button', () => (
+    <ToolButton
+      buttonName={'tick'}
+      onPressFunction={() => alert('Go to seen')}
+    />
+  ))
+
+  .add('Double tick button', () => (
+    <ToolButton
+      buttonName={'double tick'}
+      onPressFunction={() => alert('Go to learn')}
+    />
+  ))
+
+  .add('Back button', () => (
+    <ToolButton buttonName={'back'} onPressFunction={() => alert('Go back')} />
+  ))
+
+  .add('Light switcher button', () => (
+    <ToolButton
+      buttonName={'switch light'}
+      onPressFunction={() => alert('Switch light')}
+    />
   ));
