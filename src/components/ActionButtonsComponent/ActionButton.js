@@ -36,7 +36,7 @@ export default function ActionButton({
   let buttonIcon;
   let style;
 
-  if (isCorrect) {
+  if (isCorrect && isDisabled) {
     style = [styles.correctText, styles.text];
     buttonIcon = <CorrectAnswerIcon />;
   } else if (!isCorrect && isDisabled) {

@@ -9,11 +9,20 @@ storiesOf('List Item component', module)
   .addDecorator(story => <View>{story()}</View>)
 
   .add('Shorter item', () => (
-    <ListItem item={'Food'} onPressFunction={() => alert('learn')} />
+    <ListItem
+      item={'Food'}
+      onPressFunction={() => alert('learn')}
+      text={'Correct'}
+      isCorrect={true}
+      isDisabled={true}
+    />
   ))
   .add('Longer item', () => (
     <ListItem
       item={'An unecessary loooooong cat...'}
       onPressFunction={() => alert('learn')}
+      text={'Learn'}
+      isDisabled={true}
+      isCorrect={false}
     />
   ));
