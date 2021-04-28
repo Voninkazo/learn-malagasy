@@ -22,14 +22,21 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function ListItem({item, onPressFunction}) {
+export default function ListItem({
+  item,
+  onPressFunction,
+  text,
+  isDisabled,
+  isCorrect,
+}) {
   return (
     <View style={styles.listContainer}>
       <Text style={styles.text}>{item}</Text>
       <ActionButton
-        buttonText="Learn"
-        isDisabled={false}
+        buttonText={text}
+        isDisabled={isDisabled}
         onPressFunction={onPressFunction}
+        isCorrect={isCorrect}
       />
     </View>
   );
