@@ -14,12 +14,18 @@ const styles = StyleSheet.create({
     borderColor: '#E5E5E5',
     borderStyle: 'solid',
   },
+  text: {
+    fontSize: 16,
+    lineHeight: 19,
+    fontWeight: '400',
+    color: '#111827',
+  },
 });
 
 export default function ListItem({item, onPressFunction}) {
   return (
     <View style={styles.listContainer}>
-      <Text>{item}</Text>
+      <Text style={styles.text}>{item}</Text>
       <ActionButton
         buttonText="Learn"
         isDisabled={false}
