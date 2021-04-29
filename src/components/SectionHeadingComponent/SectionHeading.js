@@ -7,12 +7,14 @@ const styles = StyleSheet.create({
     lineHeight: 22,
     fontWeight: '600',
     color: '#111827',
+    paddingBottom: 15,
+    paddingTop: 15,
   },
 });
 
 export default function SectionHeading({text}) {
   return (
-    <View style={{padding: 23}}>
+    <View>
       <Text style={styles.heading}>{text}</Text>
     </View>
   );
