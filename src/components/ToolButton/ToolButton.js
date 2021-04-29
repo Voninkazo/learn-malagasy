@@ -8,9 +8,6 @@ import BackIcon from './assets/back_icon.svg';
 import LightModeIcon from './assets/light_mode_icon.svg';
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 23,
-  },
   button: {
     backgroundColor: '#06B6D4',
     padding: 13,
@@ -39,7 +36,7 @@ export default function ToolButton({btnLabel, onPressFunction}) {
   }
 
   return (
-    <View style={styles.container}>
+    <View>
       <TouchableOpacity onPress={onPressFunction} style={styles.button}>
         {icon}
       </TouchableOpacity>

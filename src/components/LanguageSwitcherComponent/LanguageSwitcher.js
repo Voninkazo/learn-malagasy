@@ -4,9 +4,6 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import ArrowSwitcher from './assets/arrow.svg';
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 23,
-  },
   button: {
     width: 90,
     height: 40,
@@ -36,7 +33,7 @@ export default function LanguageSwitcher({
   isEnglish,
 }) {
   return (
-    <View style={styles.container}>
+    <View>
       <TouchableOpacity onPress={onPressFunction} style={styles.button}>
         <Text style={styles.text}>
           {isEnglish ? englishSwitcher : malagasySwitcher}
