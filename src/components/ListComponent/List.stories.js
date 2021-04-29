@@ -16,5 +16,6 @@ storiesOf('List Component', module)
       isEnglish={true}
       listsToDisplay={categories}
       onPressFunction={() => alert('learn')}
+      buttonText={'Learn'}
     />
   ));

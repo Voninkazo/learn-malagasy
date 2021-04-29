@@ -19,6 +19,7 @@ export default function List({
   isEnglish,
   listsToDisplay,
   onPressFunction,
+  buttonText,
 }) {
   return (
     <ScrollView style={styles.container}>
@@ -30,6 +31,7 @@ export default function List({
               <ListItem
                 item={isEnglish ? cat.name['en'] : cat.name['mg']}
                 onPressFunction={onPressFunction}
+                text={buttonText}
               />
             </TouchableOpacity>
           );
