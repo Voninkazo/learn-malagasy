@@ -21,7 +21,7 @@ storiesOf('List Item component', module)
     <ListItem
       item={'An unecessary loooooong cat...'}
       onPressFunction={() => alert('learn')}
-      text={'Learn'}
+      text={'Wrong'}
       isDisabled={true}
       isCorrect={false}
     />
