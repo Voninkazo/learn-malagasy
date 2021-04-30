@@ -6,6 +6,7 @@ const styles = StyleSheet.create({
   listContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'baseline',
     paddingRight: 20,
     paddingLeft: 16,
     paddingTop: 17,
