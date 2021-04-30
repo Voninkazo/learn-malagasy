@@ -17,19 +17,26 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: 40,
     height: 40,
+    marginLeft: 10,
+  },
+  addBtnStyle: {
+    marginLeft: 0,
   },
 });
 
 export default function ToolButton({btnLabel, onPressFunction}) {
   let icon;
+  let individualStyle;
 
   if (btnLabel === 'add') {
     icon = <AddIcon />;
+    individualStyle = styles.addBtnStyle;
   } else if (btnLabel === 'tick') {
     icon = <TickIcon />;
   } else if (btnLabel === 'double tick') {
     icon = <DoubleTickIcon />;
   } else if (btnLabel === 'back') {
+    individualStyle = styles.addBtnStyle;
     icon = <BackIcon />;
   } else {
     icon = <LightModeIcon />;

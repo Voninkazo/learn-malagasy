@@ -28,6 +28,7 @@ export default function List({
                 item={isEnglish ? cat.name['en'] : cat.name['mg']}
                 onPressFunction={onPressFunction}
                 text={buttonText}
+                // isEnglish={isEnglish}
               />
             </TouchableOpacity>
           );
