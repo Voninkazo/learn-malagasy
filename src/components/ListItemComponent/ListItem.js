@@ -29,6 +29,7 @@ export default function ListItem({
   text,
   isDisabled,
   isCorrect,
+  itemId,
 }) {
   return (
     <View style={styles.listContainer}>
@@ -38,6 +39,7 @@ export default function ListItem({
         isDisabled={isDisabled}
         onPressFunction={onPressFunction}
         isCorrect={isCorrect}
+        itemId={itemId}
       />
     </View>
   );

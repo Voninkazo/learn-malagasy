@@ -6,8 +6,9 @@ import {useSelector} from 'react-redux';
 import List from '../components/ListComponent/List';
 import {getCategoryList, switchLanguage} from '../../actions';
 import ToolBar from '../components/ToolBarComponent/ToolBar';
+import SectionHeading from '../components/SectionHeadingComponent/SectionHeading';
 
-export default function HomeScreenContainer({navigation}) {
+export default function HomeScreenContainer({route, navigation}) {
   const categoryList = useSelector(state => state.categoryList);
   const isEnglish = useSelector(state => state.isEnglish);
   console.log(isEnglish);
@@ -41,13 +42,25 @@ export default function HomeScreenContainer({navigation}) {
         onPressFunction={() => dispatch(switchLanguage())}
       />
       <View>
-        <List
-          listsToDisplay={categoryList}
-          isEnglish={isEnglish}
-          buttonText={isEnglish ? 'Learn' : 'Mianatra'}
-          onPressFunction={() => navigation.navigate('LearnScreen')}
-          heading={isEnglish ? 'Select a category:' : 'Mifidiana sokajy iray:'}
+        <SectionHeading
+          text={isEnglish ? 'Select a category:' : 'Mifidiana sokajy iray:'}
         />
+        {categoryList.map(cat => {
+          return (
+            <List
+              listsToDisplay={categoryList}
+              isEnglish={isEnglish}
+              buttonText={isEnglish ? 'Learn' : 'Mianatra'}
+              onPressFunction={() =>
+                navigation.navigate('LearnScreen', {
+                  itemId: cat.id,
+                })
+              }
+              item={isEnglish ? cat.name['en'] : cat.name['mg']}
+              keyId={cat.id}
+            />
+          );
+        })}
       </View>
     </SafeAreaView>
   );
