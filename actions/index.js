@@ -15,3 +15,9 @@ export function switchLanguage() {
     type: 'SWITCH_LANGUAGE',
   };
 }
+
+export function getPhrases() {
+  return {
+    type: 'GET_PHRASES',
+  };
+}
