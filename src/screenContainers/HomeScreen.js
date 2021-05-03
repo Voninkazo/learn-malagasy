@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {View, StyleSheet, SafeAreaView} from 'react-native';
+import {View, StyleSheet, SafeAreaView, ScrollView} from 'react-native';
 import {useDispatch} from 'react-redux';
 import {useSelector} from 'react-redux';
 
@@ -11,7 +11,7 @@ import SectionHeading from '../components/SectionHeadingComponent/SectionHeading
 export default function HomeScreenContainer({route, navigation}) {
   const categoryList = useSelector(state => state.categoryList);
   const isEnglish = useSelector(state => state.isEnglish);
-  console.log(isEnglish);
+  //console.log(isEnglish);
   const dispatch = useDispatch();
   //console.log(categoryList);
 
@@ -41,27 +41,29 @@ export default function HomeScreenContainer({route, navigation}) {
         englishSwitcher="EN"
         onPressFunction={() => dispatch(switchLanguage())}
       />
-      <View>
-        <SectionHeading
-          text={isEnglish ? 'Select a category:' : 'Mifidiana sokajy iray:'}
-        />
-        {categoryList.map(cat => {
-          return (
-            <List
-              listsToDisplay={categoryList}
-              isEnglish={isEnglish}
-              buttonText={isEnglish ? 'Learn' : 'Mianatra'}
-              onPressFunction={() =>
-                navigation.navigate('LearnScreen', {
-                  itemId: cat.id,
-                })
-              }
-              item={isEnglish ? cat.name['en'] : cat.name['mg']}
-              keyId={cat.id}
-            />
-          );
-        })}
-      </View>
+      <ScrollView>
+        <View style={{paddingLeft: 23, paddingRight: 23}}>
+          <SectionHeading
+            text={isEnglish ? 'Select a category:' : 'Mifidiana sokajy iray:'}
+          />
+          {categoryList.map(cat => {
+            return (
+              <List
+                listsToDisplay={categoryList}
+                isEnglish={isEnglish}
+                buttonText={isEnglish ? 'Learn' : 'Mianatra'}
+                onPressFunction={() =>
+                  navigation.navigate('LearnScreen', {
+                    itemId: cat.id,
+                  })
+                }
+                item={isEnglish ? cat.name['en'] : cat.name['mg']}
+                keyId={cat.id}
+              />
+            );
+          })}
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }

@@ -1,10 +1,11 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {SafeAreaView, StyleSheet, View} from 'react-native';
 import {useDispatch} from 'react-redux';
 import {useSelector} from 'react-redux';
 
 import {switchLanguage} from '../../actions';
 import List from '../components/ListComponent/List';
+import Button from '../components/NextButtonComponent/Button';
 import PhraseTextarea from '../components/PhraseTextarea/PhraseTextArea';
 import SectionHeading from '../components/SectionHeadingComponent/SectionHeading';
 import ToolBar from '../components/ToolBarComponent/ToolBar';
@@ -20,6 +21,8 @@ export default function LearnScreen({route, navigation}) {
   const isEnglish = useSelector(state => state.isEnglish);
   const categoryList = useSelector(state => state.categoryList);
   const phrases = useSelector(state => state.phrases);
+  // const [randomIds, setRandomIds] = useState('');
+  const [isAnswerCorrect, setIsAnswerCorrect] = useState(false);
   //console.log(phrases);
 
   const dispatch = useDispatch();
@@ -31,19 +34,18 @@ export default function LearnScreen({route, navigation}) {
 
   const allPhrasesIds = categoryToDisplay.phrasesIds;
 
-  const randomePhrasesIds =
+  // function getRandomPhrase() {
+  const randomIds =
     allPhrasesIds[Math.floor(Math.random() * allPhrasesIds.length)];
   //console.log(randomePhrasesIds);
 
-  const phraseToDisplay = phrases.find(phr =>
-    phr.id.includes(randomePhrasesIds),
-  );
-  //console.log(phraseToDisplay);
-
   const matchedIds = phrases.filter(phr =>
-    phr.id.includes(randomePhrasesIds.substring(0, 3)),
+    phr.id.includes(randomIds.substring(0, 3)),
   );
-  //console.log(matchedIds);
+  console.log(matchedIds);
+  const phraseToDisplay = matchedIds.find(phr => phr.id === randomIds);
+  console.log(phraseToDisplay);
+
   const otherOptions = matchedIds.filter(id => id.id !== phraseToDisplay.id);
   //console.log(final);
 
@@ -53,12 +55,21 @@ export default function LearnScreen({route, navigation}) {
   //console.log(random1);
 
   const answersToDisplay = [phraseToDisplay, random1, random2, random3];
-  console.log(answersToDisplay);
+  //console.log(answersToDisplay);
 
   const shuffledAnswers = answersToDisplay.sort(function () {
     return 0.5 - Math.random();
   });
-  // console.log(shuffledAnswers);
+
+  function checkAnswer(text) {
+    const correctAnswer = phraseToDisplay.name.en;
+    if (text === correctAnswer) {
+      console.log(isAnswerCorrect);
+      setIsAnswerCorrect(true);
+    } else {
+      setIsAnswerCorrect(false);
+    }
+  }
 
   return (
     <SafeAreaView>
@@ -88,9 +99,15 @@ export default function LearnScreen({route, navigation}) {
             buttonText={isEnglish ? 'Pick' : 'Fidio'}
             item={answer.name.en}
             keyId={answer.id}
-            onPressFunction={() => alert('Pick')}
+            onPressFunction={() => checkAnswer()}
+            isCorrect={isAnswerCorrect}
           />
         ))}
+        <Button
+          disabled={false}
+          buttonText="Next"
+          //onPressFunction={() => handleClick()}
+        />
       </View>
     </SafeAreaView>
   );

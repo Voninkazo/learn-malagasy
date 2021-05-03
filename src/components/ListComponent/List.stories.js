@@ -20,5 +20,6 @@ storiesOf('List Component', module)
       itemId={'id'}
       item={'cat'}
       keyId={'key'}
+      isCorrect={false}
     />
   ));
