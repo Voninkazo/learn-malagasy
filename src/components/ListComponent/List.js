@@ -20,6 +20,8 @@ export default function List({
   item,
   keyId,
   isCorrect,
+  ref,
+  isDisabled,
 }) {
   return (
     <ScrollView>
@@ -33,6 +35,8 @@ export default function List({
             itemId={itemId}
             key={keyId}
             isCorrect={isCorrect}
+            isDisabled={isDisabled}
+            ref={ref}
           />
         </TouchableOpacity>
       </View>

@@ -16,6 +16,7 @@ storiesOf('List Item component', module)
       isCorrect={true}
       isDisabled={true}
       itemId={'btn'}
+      ref={'ref'}
     />
   ))
   .add('Longer item', () => (
@@ -26,5 +27,6 @@ storiesOf('List Item component', module)
       isDisabled={true}
       isCorrect={false}
       itemId={'btn'}
+      ref={'ref'}
     />
   ));

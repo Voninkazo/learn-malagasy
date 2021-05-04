@@ -1,7 +1,8 @@
-import React, {useEffect, useState} from 'react';
-import {SafeAreaView, StyleSheet, View} from 'react-native';
+import React, {useEffect, useRef, useState} from 'react';
+import {ScrollView, StyleSheet, View} from 'react-native';
 import {useDispatch} from 'react-redux';
 import {useSelector} from 'react-redux';
+import {useIsFocused} from '@react-navigation/native';
 
 import {switchLanguage} from '../../actions';
 import List from '../components/ListComponent/List';
@@ -14,6 +15,7 @@ const styles = StyleSheet.create({
   container: {
     paddingLeft: 23,
     paddingRight: 23,
+    paddingBottom: 107,
   },
 });
 
@@ -23,7 +25,9 @@ export default function LearnScreen({route, navigation}) {
   const phrases = useSelector(state => state.phrases);
   // const [randomIds, setRandomIds] = useState('');
   const [isAnswerCorrect, setIsAnswerCorrect] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false);
   //console.log(phrases);
+  const correct = useRef(null);
 
   const dispatch = useDispatch();
 
@@ -42,9 +46,9 @@ export default function LearnScreen({route, navigation}) {
   const matchedIds = phrases.filter(phr =>
     phr.id.includes(randomIds.substring(0, 3)),
   );
-  console.log(matchedIds);
+  // console.log(matchedIds);
   const phraseToDisplay = matchedIds.find(phr => phr.id === randomIds);
-  console.log(phraseToDisplay);
+  //console.log(phraseToDisplay);
 
   const otherOptions = matchedIds.filter(id => id.id !== phraseToDisplay.id);
   //console.log(final);
@@ -61,18 +65,28 @@ export default function LearnScreen({route, navigation}) {
     return 0.5 - Math.random();
   });
 
-  function checkAnswer(text) {
+  function checkAnswer(item) {
     const correctAnswer = phraseToDisplay.name.en;
-    if (text === correctAnswer) {
-      console.log(isAnswerCorrect);
+    console.log(item);
+    console.log(correctAnswer);
+    if (item === correctAnswer) {
+      alert(true);
       setIsAnswerCorrect(true);
+      setIsDisabled(true);
     } else {
       setIsAnswerCorrect(false);
+      setIsDisabled(true);
+      alert(false);
     }
   }
 
+  // const isFocused = useIsFocused();
+  // useIsFocused(() => {
+  //   console.log('screen');
+  // }, [isFocused]);
+
   return (
-    <SafeAreaView>
+    <ScrollView>
       <ToolBar
         isHomeScreen={false}
         malagasySwitcher="MA"
@@ -96,11 +110,19 @@ export default function LearnScreen({route, navigation}) {
         {shuffledAnswers.map(answer => (
           <List
             isEnglish={isEnglish}
-            buttonText={isEnglish ? 'Pick' : 'Fidio'}
+            buttonText={
+              isDisabled && !isAnswerCorrect
+                ? 'Wrong'
+                : isDisabled && isAnswerCorrect
+                ? 'Correct'
+                : 'Pick'
+            }
             item={answer.name.en}
             keyId={answer.id}
-            onPressFunction={() => checkAnswer()}
+            onPressFunction={() => checkAnswer(answer.name.en)}
             isCorrect={isAnswerCorrect}
+            isDisabled={isDisabled}
+            ref={isAnswerCorrect ? correct : null}
           />
         ))}
         <Button
@@ -109,6 +131,6 @@ export default function LearnScreen({route, navigation}) {
           //onPressFunction={() => handleClick()}
         />
       </View>
-    </SafeAreaView>
+    </ScrollView>
   );
 }

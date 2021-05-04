@@ -21,5 +21,6 @@ storiesOf('List Component', module)
       item={'cat'}
       keyId={'key'}
       isCorrect={false}
+      isDisabled={false}
     />
   ));

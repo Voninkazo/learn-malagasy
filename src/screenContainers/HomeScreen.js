@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {View, StyleSheet, SafeAreaView, ScrollView} from 'react-native';
+import {View, SafeAreaView, ScrollView} from 'react-native';
 import {useDispatch} from 'react-redux';
 import {useSelector} from 'react-redux';
 
@@ -21,19 +21,6 @@ export default function HomeScreenContainer({route, navigation}) {
 
   return (
     <SafeAreaView style={{paddingBottom: 66}}>
-      {/* <View style={styles.container}>
-        <ToolButton btnLabel="add" style={{paddingLeft: 0}} />
-        <LanguageSwitcher
-          isEnglish={isEnglish}
-          malagasySwitcher="MA"
-          englishSwitcher="EN"
-          onPressFunction={() => dispatch(switchLanguage())}
-        />
-        <ToolButton btnLabel="tick" />
-        <ToolButton btnLabel="double tick" />
-        <ToolButton btnLabel="back" />
-        <ToolButton />
-      </View> */}
       <ToolBar
         isHomeScreen={true}
         isEnglish={isEnglish}
