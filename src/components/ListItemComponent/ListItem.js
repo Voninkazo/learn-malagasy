@@ -29,15 +29,19 @@ export default function ListItem({
   text,
   isDisabled,
   isCorrect,
+  itemId,
+  ref,
 }) {
   return (
-    <View style={styles.listContainer}>
+    <View style={styles.listContainer} ref={ref}>
       <Text style={styles.text}>{item}</Text>
       <ActionButton
         buttonText={text}
         isDisabled={isDisabled}
         onPressFunction={onPressFunction}
         isCorrect={isCorrect}
+        itemId={itemId}
+        correct={ref}
       />
     </View>
   );

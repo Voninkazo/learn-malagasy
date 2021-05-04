@@ -1,16 +1,17 @@
 import * as React from 'react';
-import {View, StyleSheet, SafeAreaView} from 'react-native';
+import {View, SafeAreaView, ScrollView} from 'react-native';
 import {useDispatch} from 'react-redux';
 import {useSelector} from 'react-redux';
 
 import List from '../components/ListComponent/List';
 import {getCategoryList, switchLanguage} from '../../actions';
 import ToolBar from '../components/ToolBarComponent/ToolBar';
+import SectionHeading from '../components/SectionHeadingComponent/SectionHeading';
 
-export default function HomeScreenContainer({navigation}) {
+export default function HomeScreenContainer({route, navigation}) {
   const categoryList = useSelector(state => state.categoryList);
   const isEnglish = useSelector(state => state.isEnglish);
-  console.log(isEnglish);
+  //console.log(isEnglish);
   const dispatch = useDispatch();
   //console.log(categoryList);
 
@@ -20,19 +21,6 @@ export default function HomeScreenContainer({navigation}) {
 
   return (
     <SafeAreaView style={{paddingBottom: 66}}>
-      {/* <View style={styles.container}>
-        <ToolButton btnLabel="add" style={{paddingLeft: 0}} />
-        <LanguageSwitcher
-          isEnglish={isEnglish}
-          malagasySwitcher="MA"
-          englishSwitcher="EN"
-          onPressFunction={() => dispatch(switchLanguage())}
-        />
-        <ToolButton btnLabel="tick" />
-        <ToolButton btnLabel="double tick" />
-        <ToolButton btnLabel="back" />
-        <ToolButton />
-      </View> */}
       <ToolBar
         isHomeScreen={true}
         isEnglish={isEnglish}
@@ -40,15 +28,29 @@ export default function HomeScreenContainer({navigation}) {
         englishSwitcher="EN"
         onPressFunction={() => dispatch(switchLanguage())}
       />
-      <View>
-        <List
-          listsToDisplay={categoryList}
-          isEnglish={isEnglish}
-          buttonText={isEnglish ? 'Learn' : 'Mianatra'}
-          onPressFunction={() => navigation.navigate('LearnScreen')}
-          heading={isEnglish ? 'Select a category:' : 'Mifidiana sokajy iray:'}
-        />
-      </View>
+      <ScrollView>
+        <View style={{paddingLeft: 23, paddingRight: 23}}>
+          <SectionHeading
+            text={isEnglish ? 'Select a category:' : 'Mifidiana sokajy iray:'}
+          />
+          {categoryList.map(cat => {
+            return (
+              <List
+                listsToDisplay={categoryList}
+                isEnglish={isEnglish}
+                buttonText={isEnglish ? 'Learn' : 'Mianatra'}
+                onPressFunction={() =>
+                  navigation.navigate('LearnScreen', {
+                    itemId: cat.id,
+                  })
+                }
+                item={isEnglish ? cat.name['en'] : cat.name['mg']}
+                keyId={cat.id}
+              />
+            );
+          })}
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }

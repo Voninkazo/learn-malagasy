@@ -16,23 +16,29 @@ export default function List({
   listsToDisplay,
   onPressFunction,
   buttonText,
+  itemId,
+  item,
+  keyId,
+  isCorrect,
+  ref,
+  isDisabled,
 }) {
   return (
     <ScrollView>
-      <SectionHeading text={heading} />
+      {/* <SectionHeading text={heading} /> */}
       <View style={styles.listContainer}>
-        {listsToDisplay.map(cat => {
-          return (
-            <TouchableOpacity onPress={onPressFunction} key={cat.id}>
-              <ListItem
-                item={isEnglish ? cat.name['en'] : cat.name['mg']}
-                onPressFunction={onPressFunction}
-                text={buttonText}
-                // isEnglish={isEnglish}
-              />
-            </TouchableOpacity>
-          );
-        })}
+        <TouchableOpacity onPress={onPressFunction}>
+          <ListItem
+            item={item}
+            onPressFunction={onPressFunction}
+            text={buttonText}
+            itemId={itemId}
+            key={keyId}
+            isCorrect={isCorrect}
+            isDisabled={isDisabled}
+            ref={ref}
+          />
+        </TouchableOpacity>
       </View>
     </ScrollView>
   );

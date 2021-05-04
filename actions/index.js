@@ -2,8 +2,7 @@ import data from '../src/data/categories.json';
 
 export function getCategoryList() {
   return async dispatch => {
-    const categoryList = data['categories'];
-
+    const categoryList = data.categories;
     dispatch({
       type: 'LOAD_DATA',
       payload: categoryList,
@@ -14,5 +13,11 @@ export function getCategoryList() {
 export function switchLanguage() {
   return {
     type: 'SWITCH_LANGUAGE',
+  };
+}
+
+export function getPhrases() {
+  return {
+    type: 'GET_PHRASES',
   };
 }

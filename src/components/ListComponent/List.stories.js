@@ -17,5 +17,10 @@ storiesOf('List Component', module)
       listsToDisplay={categories}
       onPressFunction={() => alert('learn')}
       buttonText={'Learn'}
+      itemId={'id'}
+      item={'cat'}
+      keyId={'key'}
+      isCorrect={false}
+      isDisabled={false}
     />
   ));
