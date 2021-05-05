@@ -21,3 +21,10 @@ export function getPhrases() {
     type: 'GET_PHRASES',
   };
 }
+
+export function getSeenPhrases(phrases) {
+  return {
+    type: 'GET_SEEN_PHRASES',
+    payload: phrases,
+  };
+}

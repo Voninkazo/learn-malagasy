@@ -4,7 +4,7 @@ import {useDispatch} from 'react-redux';
 import {useSelector} from 'react-redux';
 import {useIsFocused} from '@react-navigation/native';
 
-import {switchLanguage} from '../../actions';
+import {getSeenPhrases, switchLanguage} from '../../actions';
 import List from '../components/ListComponent/List';
 import Button from '../components/NextButtonComponent/Button';
 import PhraseTextarea from '../components/PhraseTextarea/PhraseTextArea';
@@ -23,9 +23,13 @@ export default function LearnScreen({route, navigation}) {
   const isEnglish = useSelector(state => state.isEnglish);
   const categoryList = useSelector(state => state.categoryList);
   const phrases = useSelector(state => state.phrases);
+  const seenPhrases = useSelector(state => state.seenPhrases);
+  console.log(seenPhrases);
+
   // const [randomIds, setRandomIds] = useState('');
   const [isAnswerCorrect, setIsAnswerCorrect] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
+  const [clickBtn, setClickedBtn] = useState(null);
   //console.log(phrases);
   const correct = useRef(null);
 
@@ -67,12 +71,14 @@ export default function LearnScreen({route, navigation}) {
 
   function checkAnswer(item) {
     const correctAnswer = phraseToDisplay.name.en;
-    console.log(item);
-    console.log(correctAnswer);
+    // console.log(item);
+    //console.log(correctAnswer);
     if (item === correctAnswer) {
       alert(true);
       setIsAnswerCorrect(true);
       setIsDisabled(true);
+      setClickedBtn(item);
+      // correct.current === 'Correct';
     } else {
       setIsAnswerCorrect(false);
       setIsDisabled(true);
@@ -80,10 +86,11 @@ export default function LearnScreen({route, navigation}) {
     }
   }
 
-  // const isFocused = useIsFocused();
-  // useIsFocused(() => {
-  //   console.log('screen');
-  // }, [isFocused]);
+  const isFocused = useIsFocused();
+  useIsFocused(() => {
+    dispatch(getSeenPhrases(phraseToDisplay));
+    console.log('screen');
+  }, [phraseToDisplay, isFocused]);
 
   return (
     <ScrollView>
@@ -122,7 +129,8 @@ export default function LearnScreen({route, navigation}) {
             onPressFunction={() => checkAnswer(answer.name.en)}
             isCorrect={isAnswerCorrect}
             isDisabled={isDisabled}
-            ref={isAnswerCorrect ? correct : null}
+            ref={correct}
+            //clickBtn={clickBtn}
           />
         ))}
         <Button

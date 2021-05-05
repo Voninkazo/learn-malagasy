@@ -3,4 +3,5 @@ export default {
   categoryList: [],
   isEnglish: true,
   phrases: data.phrases,
+  seenPhrases: [],
 };
