@@ -24,12 +24,13 @@ export default function LearnScreen({route, navigation}) {
   const categoryList = useSelector(state => state.categoryList);
   const phrases = useSelector(state => state.phrases);
   const seenPhrases = useSelector(state => state.seenPhrases);
+  const [showNextBtn, setShowNextBtn] = useState(false);
   console.log(seenPhrases);
 
   // const [randomIds, setRandomIds] = useState('');
   const [isAnswerCorrect, setIsAnswerCorrect] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
-  const [clickBtn, setClickedBtn] = useState(null);
+  const [clickBtn, setClickedBtn] = useState(false);
   //console.log(phrases);
   const correct = useRef(null);
 
@@ -69,15 +70,21 @@ export default function LearnScreen({route, navigation}) {
     return 0.5 - Math.random();
   });
 
-  function checkAnswer(item) {
+  function checkAnswer(item, id) {
+    setShowNextBtn(true);
     const correctAnswer = phraseToDisplay.name.en;
     // console.log(item);
     //console.log(correctAnswer);
+    if (id === phraseToDisplay.id) {
+      setClickedBtn(true);
+    } else {
+      setClickedBtn(false);
+    }
     if (item === correctAnswer) {
       alert(true);
       setIsAnswerCorrect(true);
       setIsDisabled(true);
-      setClickedBtn(item);
+      setClickedBtn(id);
       // correct.current === 'Correct';
     } else {
       setIsAnswerCorrect(false);
@@ -88,7 +95,9 @@ export default function LearnScreen({route, navigation}) {
 
   const isFocused = useIsFocused();
   useIsFocused(() => {
-    dispatch(getSeenPhrases(phraseToDisplay));
+    const seen = [...seenPhrases, phraseToDisplay];
+    console.log(seen);
+    dispatch(getSeenPhrases(seen));
     console.log('screen');
   }, [phraseToDisplay, isFocused]);
 
@@ -126,18 +135,21 @@ export default function LearnScreen({route, navigation}) {
             }
             item={answer.name.en}
             keyId={answer.id}
-            onPressFunction={() => checkAnswer(answer.name.en)}
+            onPressFunction={() => checkAnswer(answer.name.en, answer.id)}
             isCorrect={isAnswerCorrect}
             isDisabled={isDisabled}
-            ref={correct}
+            isTrue={clickBtn}
+            // ref={correct}
             //clickBtn={clickBtn}
           />
         ))}
-        <Button
-          disabled={false}
-          buttonText="Next"
-          //onPressFunction={() => handleClick()}
-        />
+        {showNextBtn && (
+          <Button
+            disabled={false}
+            buttonText="Next"
+            //onPressFunction={() => handleClick()}
+          />
+        )}
       </View>
     </ScrollView>
   );
