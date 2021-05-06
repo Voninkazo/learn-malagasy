@@ -4,4 +4,5 @@ export default {
   isEnglish: true,
   phrases: data.phrases,
   seenPhrases: [],
+  learntPhrases: [],
 };

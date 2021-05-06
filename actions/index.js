@@ -28,3 +28,10 @@ export function getSeenPhrases(phrases) {
     payload: phrases,
   };
 }
+
+export function getLearntPhrases(phrases) {
+  return {
+    type: 'GET_LEARNT_PHRASES',
+    payload: phrases,
+  };
+}
