@@ -9,7 +9,7 @@ import {
   getPhrases,
   getSeenPhrases,
   switchLanguage,
-} from '../../actions';
+} from '../redux/actions';
 import List from '../components/ListComponent/List';
 import Button from '../components/NextButtonComponent/Button';
 import PhraseTextarea from '../components/PhraseTextarea/PhraseTextArea';

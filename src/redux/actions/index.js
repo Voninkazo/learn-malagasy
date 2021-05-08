@@ -1,4 +1,4 @@
-import data from '../src/data/categories.json';
+import data from '../../data/categories.json';
 
 export function getCategoryList() {
   return async dispatch => {

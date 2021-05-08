@@ -4,7 +4,7 @@ import {useDispatch} from 'react-redux';
 import {useSelector} from 'react-redux';
 
 import List from '../components/ListComponent/List';
-import {getCategoryList, switchLanguage} from '../../actions';
+import {getCategoryList, switchLanguage} from '../redux/actions';
 import ToolBar from '../components/ToolBarComponent/ToolBar';
 import SectionHeading from '../components/SectionHeadingComponent/SectionHeading';
 import PhraseTextarea from '../components/PhraseTextarea/PhraseTextArea';
