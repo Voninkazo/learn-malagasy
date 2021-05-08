@@ -32,15 +32,16 @@ export default function LearnScreen({route}) {
   const [showNextBtn, setShowNextBtn] = useState(false);
   const [isAnswerCorrect, setIsAnswerCorrect] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
-  const dispatch = useDispatch();
+
   const {itemId} = route.params;
 
+  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getPhrases());
     dispatch(getCategoryList());
   }, []);
 
-  const categoryToDisplay = categoryList.find(i => i.id === itemId);
+  const categoryToDisplay = categoryList.find(cat => cat.id === itemId);
 
   const allPhrasesIds = categoryToDisplay.phrasesIds;
   const randomIds =
@@ -49,6 +50,7 @@ export default function LearnScreen({route}) {
   const matchedIds = phrases.filter(phr =>
     phr.id.includes(randomIds.substring(0, 3)),
   );
+
   const phraseObjectToDisplay = matchedIds.find(phr => phr.id === randomIds);
 
   const otherOptions = matchedIds.filter(
@@ -65,7 +67,7 @@ export default function LearnScreen({route}) {
     return 0.5 - Math.random();
   });
 
-  function checkAnswer(item) {
+  function validateAnswers(item) {
     setIsDisabled(true);
     setShowNextBtn(true);
     const correctAnswer = phraseObjectToDisplay.name.en;
@@ -78,7 +80,7 @@ export default function LearnScreen({route}) {
     }
   }
 
-  function handleClick() {
+  function handleClickNext() {
     setIsAnswerCorrect(false);
     setShowNextBtn(false);
     setIsDisabled(false);
@@ -130,14 +132,14 @@ export default function LearnScreen({route}) {
             keyId={answer.id}
             isCorrect={isAnswerCorrect}
             isDisabled={isDisabled}
-            onPressFunction={() => checkAnswer(answer.name.en)}
+            onPressFunction={() => validateAnswers(answer.name.en)}
           />
         ))}
         {showNextBtn && (
           <Button
             disabled={false}
             buttonText="Next"
-            onPressFunction={() => handleClick()}
+            onPressFunction={() => handleClickNext()}
           />
         )}
       </View>

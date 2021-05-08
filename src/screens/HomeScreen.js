@@ -44,6 +44,7 @@ export default function HomeScreenContainer({navigation}) {
                     itemId: cat.id,
                   })
                 }
+                keyId={cat.id}
                 item={isEnglish ? cat.name['en'] : cat.name['mg']}
               />
             );
