@@ -1,10 +1,15 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
 import {useDispatch} from 'react-redux';
 import {useSelector} from 'react-redux';
 import {useIsFocused} from '@react-navigation/native';
 
-import {getSeenPhrases, switchLanguage} from '../../actions';
+import {
+  getCategoryList,
+  getPhrases,
+  getSeenPhrases,
+  switchLanguage,
+} from '../../actions';
 import List from '../components/ListComponent/List';
 import Button from '../components/NextButtonComponent/Button';
 import PhraseTextarea from '../components/PhraseTextarea/PhraseTextArea';
@@ -19,87 +24,71 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function LearnScreen({route, navigation}) {
+export default function LearnScreen({route}) {
   const isEnglish = useSelector(state => state.isEnglish);
   const categoryList = useSelector(state => state.categoryList);
   const phrases = useSelector(state => state.phrases);
   const seenPhrases = useSelector(state => state.seenPhrases);
   const [showNextBtn, setShowNextBtn] = useState(false);
-  console.log(seenPhrases);
-
-  // const [randomIds, setRandomIds] = useState('');
   const [isAnswerCorrect, setIsAnswerCorrect] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
-  const [clickBtn, setClickedBtn] = useState(false);
-  //console.log(phrases);
-  const correct = useRef(null);
-
   const dispatch = useDispatch();
-
   const {itemId} = route.params;
 
+  useEffect(() => {
+    dispatch(getPhrases());
+    dispatch(getCategoryList());
+  }, []);
+
   const categoryToDisplay = categoryList.find(i => i.id === itemId);
-  // console.log(categoryToDisplay);
 
   const allPhrasesIds = categoryToDisplay.phrasesIds;
-
-  // function getRandomPhrase() {
   const randomIds =
     allPhrasesIds[Math.floor(Math.random() * allPhrasesIds.length)];
-  //console.log(randomePhrasesIds);
 
   const matchedIds = phrases.filter(phr =>
     phr.id.includes(randomIds.substring(0, 3)),
   );
-  // console.log(matchedIds);
-  const phraseToDisplay = matchedIds.find(phr => phr.id === randomIds);
-  //console.log(phraseToDisplay);
+  const phraseObjectToDisplay = matchedIds.find(phr => phr.id === randomIds);
 
-  const otherOptions = matchedIds.filter(id => id.id !== phraseToDisplay.id);
-  //console.log(final);
+  const otherOptions = matchedIds.filter(
+    id => id.id !== phraseObjectToDisplay.id,
+  );
 
   const random1 = otherOptions[Math.floor(Math.random() * otherOptions.length)];
   const random2 = otherOptions[Math.floor(Math.random() * otherOptions.length)];
   const random3 = otherOptions[Math.floor(Math.random() * otherOptions.length)];
-  //console.log(random1);
 
-  const answersToDisplay = [phraseToDisplay, random1, random2, random3];
-  //console.log(answersToDisplay);
+  const answersToDisplay = [phraseObjectToDisplay, random1, random2, random3];
 
   const shuffledAnswers = answersToDisplay.sort(function () {
     return 0.5 - Math.random();
   });
 
-  function checkAnswer(item, id) {
+  function checkAnswer(item) {
+    setIsDisabled(true);
     setShowNextBtn(true);
-    const correctAnswer = phraseToDisplay.name.en;
-    // console.log(item);
-    //console.log(correctAnswer);
-    if (id === phraseToDisplay.id) {
-      setClickedBtn(true);
-    } else {
-      setClickedBtn(false);
-    }
+    const correctAnswer = phraseObjectToDisplay.name.en;
     if (item === correctAnswer) {
       alert(true);
       setIsAnswerCorrect(true);
-      setIsDisabled(true);
-      setClickedBtn(id);
-      // correct.current === 'Correct';
     } else {
-      setIsAnswerCorrect(false);
-      setIsDisabled(true);
       alert(false);
+      setIsAnswerCorrect(false);
     }
+  }
+
+  function handleClick() {
+    setIsAnswerCorrect(false);
+    setShowNextBtn(false);
+    setIsDisabled(false);
   }
 
   const isFocused = useIsFocused();
   useIsFocused(() => {
-    const seen = [...seenPhrases, phraseToDisplay];
-    console.log(seen);
-    dispatch(getSeenPhrases(seen));
-    console.log('screen');
-  }, [phraseToDisplay, isFocused]);
+    const seenWordsAndPhrases = [...seenPhrases, phraseObjectToDisplay];
+    dispatch(getSeenPhrases(seenWordsAndPhrases));
+  }, [phraseObjectToDisplay, isFocused]);
 
   return (
     <ScrollView>
@@ -119,35 +108,36 @@ export default function LearnScreen({route, navigation}) {
           }
         />
         <SectionHeading text={isEnglish ? 'The phrase:' : 'Fehezan-teny:'} />
-        <PhraseTextarea editable={false} phrase={phraseToDisplay.name.mg} />
+        <PhraseTextarea
+          editable={false}
+          phrase={phraseObjectToDisplay?.name.mg}
+        />
         <SectionHeading
           text={isEnglish ? 'Pick a solution:' : 'Mifidiana valiny iray:'}
         />
+
         {shuffledAnswers.map(answer => (
           <List
             isEnglish={isEnglish}
             buttonText={
-              isDisabled && !isAnswerCorrect
-                ? 'Wrong'
-                : isDisabled && isAnswerCorrect
+              isAnswerCorrect && isDisabled
                 ? 'Correct'
+                : !isAnswerCorrect && isDisabled
+                ? 'Wrong'
                 : 'Pick'
             }
             item={answer.name.en}
             keyId={answer.id}
-            onPressFunction={() => checkAnswer(answer.name.en, answer.id)}
             isCorrect={isAnswerCorrect}
             isDisabled={isDisabled}
-            isTrue={clickBtn}
-            // ref={correct}
-            //clickBtn={clickBtn}
+            onPressFunction={() => checkAnswer(answer.name.en)}
           />
         ))}
         {showNextBtn && (
           <Button
             disabled={false}
             buttonText="Next"
-            //onPressFunction={() => handleClick()}
+            onPressFunction={() => handleClick()}
           />
         )}
       </View>

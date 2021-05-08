@@ -11,7 +11,7 @@ storiesOf('ActionButtonComponents', module)
     <ActionButton
       buttonText={'Pick'}
       isDisabled={false}
-      correct={'Ref'}
+      isCorrect={false}
       onPressFunction={() => alert('Picked an answer')}
     />
   ))
@@ -22,7 +22,6 @@ storiesOf('ActionButtonComponents', module)
       isDisabled={true}
       isCorrect={true}
       onPressFunction={() => alert('Right answer')}
-      correct={'Ref'}
     />
   ))
 
@@ -31,7 +30,6 @@ storiesOf('ActionButtonComponents', module)
       buttonText={'Wrong'}
       isCorrect={false}
       isDisabled={true}
-      correct={'Ref'}
       onPressFunction={() => alert('Wrong answer')}
     />
   ));

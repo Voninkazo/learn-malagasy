@@ -9,14 +9,12 @@ import ToolBar from '../components/ToolBarComponent/ToolBar';
 import SectionHeading from '../components/SectionHeadingComponent/SectionHeading';
 import PhraseTextarea from '../components/PhraseTextarea/PhraseTextArea';
 
-export default function HomeScreenContainer({route, navigation}) {
+export default function HomeScreenContainer({navigation}) {
   const categoryList = useSelector(state => state.categoryList);
   const isEnglish = useSelector(state => state.isEnglish);
   const seenPhrases = useSelector(state => state.seenPhrases);
   const learntPhrases = useSelector(state => state.learntPhrases);
-  //console.log(isEnglish);
   const dispatch = useDispatch();
-  //console.log(categoryList);
 
   React.useEffect(() => {
     dispatch(getCategoryList());
@@ -39,7 +37,6 @@ export default function HomeScreenContainer({route, navigation}) {
           {categoryList.map(cat => {
             return (
               <List
-                listsToDisplay={categoryList}
                 isEnglish={isEnglish}
                 buttonText={isEnglish ? 'Learn' : 'Mianatra'}
                 onPressFunction={() =>
@@ -48,7 +45,6 @@ export default function HomeScreenContainer({route, navigation}) {
                   })
                 }
                 item={isEnglish ? cat.name['en'] : cat.name['mg']}
-                keyId={cat.id}
               />
             );
           })}

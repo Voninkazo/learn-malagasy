@@ -32,7 +32,6 @@ export default function ActionButton({
   buttonText,
   isCorrect,
   isDisabled,
-  correct,
 }) {
   let buttonIcon;
   let style;
@@ -51,7 +50,6 @@ export default function ActionButton({
   return (
     <SafeAreaView>
       <TouchableOpacity
-        ref={correct}
         onPress={onPressFunction}
         style={styles.button}
         disabled={isDisabled}

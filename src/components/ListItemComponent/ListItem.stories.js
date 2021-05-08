@@ -11,22 +11,18 @@ storiesOf('List Item component', module)
   .add('Shorter item', () => (
     <ListItem
       item={'Food'}
-      onPressFunction={() => alert('learn')}
       text={'Correct'}
       isCorrect={true}
       isDisabled={true}
-      itemId={'btn'}
-      ref={'ref'}
+      onPressFunction={() => alert('learn')}
     />
   ))
   .add('Longer item', () => (
     <ListItem
       item={'An unecessary loooooong cat...'}
-      onPressFunction={() => alert('learn')}
       text={'Wrong'}
       isDisabled={true}
       isCorrect={false}
-      itemId={'btn'}
-      ref={'ref'}
+      onPressFunction={() => alert('learn')}
     />
   ));
