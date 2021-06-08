@@ -28,9 +28,9 @@ const styles = StyleSheet.create({
 });
 
 export default function LanguageSwitcher({
-  malagasySwitcher,
+  malagasySwitcher, // better would be primary and secondary language as it might not always be malagasy and english
   englishSwitcher,
-  onPressFunction,
+  onPressFunction, // onPress is enough to show it is a function
   isEnglish,
 }) {
   return (

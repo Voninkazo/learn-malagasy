@@ -21,7 +21,7 @@ storiesOf('List Item component', module)
   ))
   .add('Longer item', () => (
     <ListItem
-      item={'An unecessary loooooong cat...'}
+      item={'An unecessary loooooong cat...'} // Thats not quite concatenation, is it?
       onPressFunction={() => alert('learn')}
       text={'Wrong'}
       isDisabled={true}

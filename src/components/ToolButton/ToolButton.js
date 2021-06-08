@@ -25,12 +25,18 @@ const styles = StyleSheet.create({
 });
 
 export default function ToolButton({btnLabel, onPressFunction}) {
-  let icon;
-  let individualStyle;
+  let icon; // instead of initializing it as an empty variable, which is not a good thing to do, consider using an object:
+  // let icon = {
+  //   add: () => <AddIcon />,
+  //   tick: () => <TickIcon />,
+  //   ... an so on
+  // }
+  // ans then call it with icon[btnLabel]
+  let individualStyle; // What is this used for?
 
   if (btnLabel === 'add') {
     icon = <AddIcon />;
-    individualStyle = styles.addBtnStyle;
+    individualStyle = styles.addBtnStyle; 
   } else if (btnLabel === 'tick') {
     icon = <TickIcon />;
   } else if (btnLabel === 'double tick') {

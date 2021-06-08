@@ -40,7 +40,7 @@ export default function ListItem({
         isDisabled={isDisabled}
         onPressFunction={onPressFunction}
         isCorrect={isCorrect}
-        itemId={itemId}
+        itemId={itemId} // Action button does not expect this
         correct={ref}
       />
     </View>

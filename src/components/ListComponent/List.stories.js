@@ -14,7 +14,7 @@ storiesOf('List Component', module)
     <List
       heading={'Select a category:'}
       isEnglish={true}
-      listsToDisplay={categories}
+      listsToDisplay={categories} // lots of these arguments are not expected by the component.
       onPressFunction={() => alert('learn')}
       buttonText={'Learn'}
       itemId={'id'}

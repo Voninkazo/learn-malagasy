@@ -52,7 +52,7 @@ export default function LearnScreen({route, navigation}) {
 
   const otherOptions = matchedIds.filter(id => id.id !== phraseToDisplay.id);
   //console.log(final);
-
+  // This allows for duplicate answers
   const random1 = otherOptions[Math.floor(Math.random() * otherOptions.length)];
   const random2 = otherOptions[Math.floor(Math.random() * otherOptions.length)];
   const random3 = otherOptions[Math.floor(Math.random() * otherOptions.length)];

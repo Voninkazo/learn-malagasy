@@ -11,7 +11,7 @@ storiesOf('ActionButtonComponents', module)
     <ActionButton
       buttonText={'Pick'}
       isDisabled={false}
-      correct={'Ref'}
+      correct={'Ref'} // This does not work
       onPressFunction={() => alert('Picked an answer')}
     />
   ))
